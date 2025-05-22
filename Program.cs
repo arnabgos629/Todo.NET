@@ -22,8 +22,8 @@ builder.Services.AddSingleton<TodoService>();
 // Register CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowReactApp",
-        policy => policy.WithOrigins("https://todo-frontend-beta-seven.vercel.app/")
+    options.AddPolicy("AllowAll",
+        policy => policy.AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod());
 });
@@ -38,7 +38,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("AllowReactApp");
+app.UseCors("AllowAll");
 app.UseMiddleware<ValidationMiddleware>();
 app.UseAuthorization();
 app.MapControllers();
